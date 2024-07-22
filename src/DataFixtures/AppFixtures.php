@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    const ASSETS_PATH = 'assets/img/';
     public function load(ObjectManager $manager): void
     {
         $types = ['Chien', 'Chat', 'Poule'];

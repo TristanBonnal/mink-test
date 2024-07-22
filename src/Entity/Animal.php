@@ -2,13 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
+#[ApiResource(
+    normalizationContext: [
+        'groups' => ['read:collection']
+    ]
+)]
+
 class Animal
 {
     #[ORM\Id]
@@ -17,32 +25,40 @@ class Animal
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:collection'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['read:collection'])]
     private ?int $age = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read:collection'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['read:collection'])]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Groups(['read:item'])]
     private ?bool $status = null;
 
     /**
      * @var Collection<int, Picture>
      */
     #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'animal')]
+    #[Groups(['read:collection'])]
     private Collection $picture;
 
     #[ORM\ManyToOne(inversedBy: 'animal')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read:collection'])]
     private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'animal')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read:collection'])]
     private ?Breed $breed = null;
 
     public function __construct()

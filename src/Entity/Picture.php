@@ -2,10 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
+#[ApiResource(
+    normalizationContext: [
+        'groups' => ['read:collection']
+    ]
+)]
 class Picture
 {
     #[ORM\Id]
@@ -17,6 +24,7 @@ class Picture
     private ?Animal $animal = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:collection'])]
     private ?string $url = null;
 
     public function getId(): ?int
