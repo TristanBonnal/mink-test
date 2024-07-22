@@ -6,12 +6,16 @@ use App\Entity\Animal;
 use App\Entity\Breed;
 use App\Entity\Picture;
 use App\Entity\Type;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    const ASSETS_PATH = 'assets/img/';
+    public function __construct (
+        private readonly UserPasswordHasherInterface $passwordHasher
+    ){}
     public function load(ObjectManager $manager): void
     {
         $types = ['Chien', 'Chat', 'Poule'];
@@ -117,6 +121,13 @@ class AppFixtures extends Fixture
 
             $count++;
         }
+
+        // Création utilisateur
+        $user = new User();
+        $user->setEmail('user@user.fr');;
+        $user->setPassword($this->passwordHasher->hashPassword($user, 'user'));
+        $manager->persist($user);
+
 
         $manager->flush();
     }

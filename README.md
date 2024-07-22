@@ -10,6 +10,16 @@ npm install
 - Init db
 Configurer DATABASE_URL dans le .env ou le .env.local
 ```bash
-bin/console doctrine:database:create
-bin/console doctrine:migrations:migrate
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+```
+- Générer les assets
+```bash
+npm run dev
+```
+
+- Générer les clés pour l'auth JWT
+```bash
+php bin/console lexik:jwt:generate-keypair
 ```
