@@ -7,7 +7,7 @@
 composer install
 npm install
 ```
-- Init db
+- Init db  
 Configurer DATABASE_URL dans le .env ou le .env.local
 ```bash
 php bin/console doctrine:database:create
@@ -23,3 +23,7 @@ npm run dev
 ```bash
 php bin/console lexik:jwt:generate-keypair
 ```
+- Identifiants utilisateurs test
+>'admin@admin.fr' => 'admin'  
+>'user@user.fr => 'user'
+

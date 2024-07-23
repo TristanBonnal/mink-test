@@ -7,12 +7,6 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            lazy: true
-            provider: app_user_provider
         login:
             pattern: ^/api/login
             stateless: true
@@ -25,10 +19,16 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-#        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin,     roles: ROLE_ADMIN }
 
 when@test:
     security:
