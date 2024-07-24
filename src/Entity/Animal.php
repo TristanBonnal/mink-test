@@ -59,7 +59,7 @@ class Animal
     /**
      * @var Collection<int, Picture>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'animal')]
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'animal',  cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[Groups(['read:collection'])]
     private Collection $picture;
 

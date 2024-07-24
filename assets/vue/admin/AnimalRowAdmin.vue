@@ -9,17 +9,29 @@
         </td>
         <td class="px-4 py-2 border-b">{{ animal.type.name }}</td>
         <td class="px-4 py-2 border-b">{{ animal.breed.name }}</td>
+        <td class="px-4 py-2 border-b">
+            <button @click="editAnimal" class="text-blue-500 hover:underline">Editer</button>
+            <button @click="deleteAnimal" class="text-red-500 hover:underline ml-2">Supprimer</button>
+        </td>
     </tr>
 </template>
 
 <script setup>
-
 const props = defineProps({
     animal: {
         type: Object,
         required: true
     }
 });
-</script>
 
+const emits = defineEmits(['edit', 'delete']);
+
+const editAnimal = () => {
+    emits('edit', props.animal);
+};
+
+const deleteAnimal = () => {
+    emits('delete', props.animal);
+};
+</script>
 

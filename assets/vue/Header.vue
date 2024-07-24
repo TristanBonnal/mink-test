@@ -45,6 +45,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { ref, onMounted } from 'vue'
 import Cookies from 'js-cookie'
 import LoginModal from './LoginModal.vue'
+import axios from "axios";
 
 const props = defineProps({
     currentRoute: String,
@@ -81,5 +82,6 @@ navigation.forEach(item => {
 
 onMounted(() => {
     checkAuthStatus();
+    axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('BEARER') ?? ''}`
 });
 </script>

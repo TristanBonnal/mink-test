@@ -27,3 +27,11 @@ php bin/console lexik:jwt:generate-keypair
 >'admin@admin.fr' => 'admin'  
 >'user@user.fr => 'user'
 
+
+TODO : 
+- Corriger edit animal
+- Permissions route /admin
+- Tri + filtre
+- Persistance en cascade des relations
+- Upload images
+- Gestion statut
